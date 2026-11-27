@@ -4,7 +4,11 @@
 
 A casual mobile puzzle game: a picture made of sand grains sits on top, and colourful vacuum cleaners clean it up. You earn those vacuums by solving a different puzzle at the bottom of every level.
 
-Prototype · HTML5 canvas · Android APK via Capacitor · No dependencies at runtime
+<p align="center">
+  <img src="docs/screenshots/hero-en.jpg" alt="Sand Vac: level menu, Arrow Escape level and Color Sort level" width="900">
+</p>
+
+Prototype · HTML5 canvas · Android APK via Capacitor · No runtime dependencies · Turkish and English
 
 ---
 
@@ -20,16 +24,24 @@ Prototype · HTML5 canvas · Android APK via Capacitor · No dependencies at run
 
 ### Levels
 
-| # | Picture | Bottom puzzle | Rule |
-|---|---------|---------------|------|
-| 1 | Heart | Number Merge | Merge two vacuums of the same colour and number. Every send uses up one move. |
-| 2 | Sailboat | Color Sort | Pour sand between tubes. When a tube holds 4 layers of one colour, it becomes a vacuum. |
-| 3 | Daisy | Match-3 | Matches fill that colour's charge bar. A full bar releases a vacuum. |
-| 4 | Snowy Peak | Push Puzzle | Push vacuum crates out through the purple gates. Undo is available. |
-| 5 | Cat | Arrow Escape | A vacuum slides out only if the path in its arrow's direction is clear. |
-| 6 | Sunset | Pipe Connect | Rotate pipes to lead the sand to the empty vacuum. |
+Every level pairs a sand picture with a different bottom puzzle.
 
-The game is in Turkish and English. Use the **EN / TR** button in the top bar to switch. The first language follows your device's language.
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/screenshots/en-level-1-merge.jpg" alt="Level 1, Heart, Number Merge" width="240"><br><b>1. Heart · Number Merge</b><br>Merge two vacuums of the same colour and number. Every send uses up one move.</td>
+    <td align="center" width="33%"><img src="docs/screenshots/en-level-2-sort.jpg" alt="Level 2, Sailboat, Color Sort" width="240"><br><b>2. Sailboat · Color Sort</b><br>Pour sand between tubes. 4 layers of one colour turn into a vacuum.</td>
+    <td align="center" width="33%"><img src="docs/screenshots/en-level-3-match3.jpg" alt="Level 3, Daisy, Match-3" width="240"><br><b>3. Daisy · Match-3</b><br>Matches fill that colour's charge bar. A full bar releases a vacuum.</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/en-level-4-push.jpg" alt="Level 4, Snowy Peak, Push Puzzle" width="240"><br><b>4. Snowy Peak · Push Puzzle</b><br>Push vacuum crates out through the purple gates. Undo is available.</td>
+    <td align="center"><img src="docs/screenshots/en-level-5-arrow.jpg" alt="Level 5, Cat, Arrow Escape" width="240"><br><b>5. Cat · Arrow Escape</b><br>A vacuum slides out only if the path in its arrow's direction is clear.</td>
+    <td align="center"><img src="docs/screenshots/en-level-6-pipe.jpg" alt="Level 6, Sunset, Pipe Connect" width="240"><br><b>6. Sunset · Pipe Connect</b><br>Rotate pipes to lead the sand to the empty vacuum.</td>
+  </tr>
+</table>
+
+### Language
+
+The game is in Turkish and English. Use the **EN / TR** button in the top bar to switch, even in the middle of a level. The first language follows your device's language.
 
 ### Install
 
@@ -41,6 +53,8 @@ Download `SandVac-*.apk` from [Releases](../../releases) and open it on an Andro
 npm test                                   # 20 logic tests (node --test)
 python -m http.server 8130 --directory www  # then open http://localhost:8130
 ```
+
+Add `?debug` to the URL to expose the running game as `window.sandVacDebug` (used for automated checks and the screenshots in this README).
 
 ### Build the APK
 
@@ -62,12 +76,17 @@ www/js/puzzles/   the six bottom puzzles (pure logic + drawing)
 www/js/game.js    rail, vacuums, dock, win / lose
 www/js/i18n.js    Turkish and English strings
 tests/            node:test suites, including a bot that clears every level
+docs/screenshots/ README images (Turkish and English)
 android/          Capacitor Android project
 ```
 
 ---
 
 ## Türkçe
+
+<p align="center">
+  <img src="docs/screenshots/hero-tr.jpg" alt="Sand Vac: bölüm menüsü, Ok Kaçışı ve Renk Sıralama bölümleri" width="900">
+</p>
 
 ### Nasıl oynanır
 
@@ -79,16 +98,24 @@ android/          Capacitor Android project
 
 ### Bölümler
 
-| # | Resim | Alt bulmaca | Kural |
-|---|-------|-------------|-------|
-| 1 | Kalp | Sayı Birleştirme | Aynı renk ve aynı sayıdaki iki süpürgeyi birleştir. Her gönderim bir hak harcar. |
-| 2 | Yelkenli | Renk Sıralama | Kumu tüpten tüpe dök. 4 katmanı aynı renk olan tüp süpürgeye dönüşür. |
-| 3 | Papatya | Üçlü Eşleştirme | Eşleştirmeler o rengin göstergesini doldurur. Dolan gösterge bir süpürge çıkarır. |
-| 4 | Karlı Dağ | İtme Bulmacası | Süpürge kutularını mor kapılardan dışarı it. Geri alma tuşu var. |
-| 5 | Kedi | Ok Kaçışı | Süpürge, okunun gösterdiği yol boşsa kayıp çıkar. |
-| 6 | Gün Batımı | Boru Bağlama | Boruları döndürerek kumu boş süpürgeye ulaştır. |
+Her bölümde bir kum resmi ve altta farklı bir bulmaca var.
 
-Oyun Türkçe ve İngilizce. Dili üst çubuktaki **EN / TR** düğmesiyle değiştirebilirsin. İlk açılışta cihazının dili seçilir.
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/screenshots/tr-level-1-merge.jpg" alt="1. bölüm, Kalp, Sayı Birleştirme" width="240"><br><b>1. Kalp · Sayı Birleştirme</b><br>Aynı renk ve aynı sayıdaki iki süpürgeyi birleştir. Her gönderim bir hak harcar.</td>
+    <td align="center" width="33%"><img src="docs/screenshots/tr-level-2-sort.jpg" alt="2. bölüm, Yelkenli, Renk Sıralama" width="240"><br><b>2. Yelkenli · Renk Sıralama</b><br>Kumu tüpten tüpe dök. 4 katmanı aynı renk olan tüp süpürgeye dönüşür.</td>
+    <td align="center" width="33%"><img src="docs/screenshots/tr-level-3-match3.jpg" alt="3. bölüm, Papatya, Üçlü Eşleştirme" width="240"><br><b>3. Papatya · Üçlü Eşleştirme</b><br>Eşleştirmeler o rengin göstergesini doldurur. Dolan gösterge bir süpürge çıkarır.</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/tr-level-4-push.jpg" alt="4. bölüm, Karlı Dağ, İtme Bulmacası" width="240"><br><b>4. Karlı Dağ · İtme Bulmacası</b><br>Süpürge kutularını mor kapılardan dışarı it. Geri alma tuşu var.</td>
+    <td align="center"><img src="docs/screenshots/tr-level-5-arrow.jpg" alt="5. bölüm, Kedi, Ok Kaçışı" width="240"><br><b>5. Kedi · Ok Kaçışı</b><br>Süpürge, okunun gösterdiği yol boşsa kayıp çıkar.</td>
+    <td align="center"><img src="docs/screenshots/tr-level-6-pipe.jpg" alt="6. bölüm, Gün Batımı, Boru Bağlama" width="240"><br><b>6. Gün Batımı · Boru Bağlama</b><br>Boruları döndürerek kumu boş süpürgeye ulaştır.</td>
+  </tr>
+</table>
+
+### Dil
+
+Oyun Türkçe ve İngilizce. Dili üst çubuktaki **EN / TR** düğmesiyle, bölümün ortasında bile değiştirebilirsin. İlk açılışta cihazının dili seçilir.
 
 ### Kurulum
 

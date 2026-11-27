@@ -196,6 +196,11 @@ function wireButtons() {
   canvas.addEventListener('pointerdown', onPointer);
 }
 
+// ?debug exposes the running game for automated tests and screenshots.
+if (new URLSearchParams(location.search).has('debug')) {
+  window.sandVacDebug = { get game() { return game; }, addVacuums, startLevel };
+}
+
 window.addEventListener('resize', resize);
 wireButtons();
 resize();
