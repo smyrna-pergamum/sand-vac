@@ -1,0 +1,9 @@
+{
+  "appId": "com.smyrnapergamum.kumsupurgesi",
+  "appName": "Kum Süpürgesi",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#bfe6f7",
+    "adjustMarginsForEdgeToEdge": "auto"
+  }
+}
