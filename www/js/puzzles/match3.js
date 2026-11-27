@@ -4,6 +4,7 @@ import { pick, shuffle, splitTotal } from '../core/rng.js';
 import { gridHit } from '../layout.js';
 import { rr, sandRect, text, drawVacuum } from '../draw.js';
 import { colorOf } from '../core/palette.js';
+import { t } from '../i18n.js';
 
 export const M3 = Object.freeze({ w: 6, h: 6, threshold: 6, parts: 3 });
 
@@ -125,7 +126,7 @@ export function createMatchPuzzle({ counts, colors, rng }) {
   let state = createMatchState(counts, colors, rng);
   const board = (r) => ({ x: r.x + 4, y: r.y + 4, w: 252, h: 252 });
   return {
-    hint: () => 'Yan yana iki taşı değiştir, 3 aynı rengi diz.',
+    hint: () => t('match.hint'),
     tap(x, y, r) {
       const hit = gridHit(board(r), M3.w, M3.h, x, y);
       if (!hit) return { emitted: [], sound: null };
@@ -160,7 +161,7 @@ export function createMatchPuzzle({ counts, colors, rng }) {
         }
       });
       const sx = b.x + b.w + 14;
-      text(ctx, 'Doluluk', sx, r.y + 14, 12, '#55697a', 'left');
+      text(ctx, t('match.charge'), sx, r.y + 14, 12, '#55697a', 'left');
       state.colors.forEach((c, k) => {
         const y = r.y + 40 + k * 56;
         const q = state.queues[c];

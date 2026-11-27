@@ -1,6 +1,6 @@
 {
   "name": "sand-vac",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Sand Vac — sand-picture and vacuum-cleaner puzzle game prototype",
   "type": "module",

@@ -3,6 +3,7 @@
 import { shuffle, splitTotal } from '../core/rng.js';
 import { inRect } from '../layout.js';
 import { rr, sandRect, text, drawVacuum } from '../draw.js';
+import { t } from '../i18n.js';
 
 export const TUBE_CAP = 4;
 const EXTRA_TUBES = 2;
@@ -126,7 +127,7 @@ export function createSortPuzzle({ counts, colors, rng }) {
   let state = createSortState(counts, colors, rng);
   let deadEnd = false;
   return {
-    hint: () => (state.selected === null ? 'Bir tüpe dokun, sonra dökmek istediğin tüpe dokun.' : 'Nereye dökeceksin?'),
+    hint: () => t(state.selected === null ? 'sort.hint' : 'sort.hintSelected'),
     tap(x, y, r) {
       const rects = tubeRects(r, state.tubes.length);
       const i = rects.findIndex((rc) => inRect({ ...rc, y: rc.y - 20, h: rc.h + 40 }, x, y));
@@ -141,7 +142,7 @@ export function createSortPuzzle({ counts, colors, rng }) {
     },
     draw(ctx, r) {
       const rects = tubeRects(r, state.tubes.length);
-      text(ctx, 'Aynı renkte 4 katman = 1 süpürge', r.x + r.w / 2, r.y + 14, 13, '#55697a');
+      text(ctx, t('sort.rule'), r.x + r.w / 2, r.y + 14, 13, '#55697a');
       state.tubes.forEach((t, i) => {
         const rc = rects[i];
         const lift = i === state.selected ? -14 : 0;

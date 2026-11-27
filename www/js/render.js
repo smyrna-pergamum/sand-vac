@@ -2,6 +2,7 @@ import { colorOf, shade } from './core/palette.js';
 import { VIEW, N, PIC, RAIL_OFF, PROGRESS, DOCK, PUZ, HINT_Y, dockRect, railPoint } from './layout.js';
 import { rr, text, drawVacuum } from './draw.js';
 import { progress } from './game.js';
+import { t } from './i18n.js';
 
 // Each grain is a 5x5 sprite: 0 = gap, 1 = body, 2 = highlight, 3 = shadow.
 const GRAIN = [
@@ -141,7 +142,7 @@ function drawDock(ctx, g) {
   }
   const used = g.dock.filter(Boolean).length;
   if (used >= DOCK.slots - 1) {
-    text(ctx, used === DOCK.slots ? 'İskele dolu!' : 'İskele dolmak üzere', VIEW.w / 2, DOCK.y + DOCK.h + 8, 11, '#d0453c');
+    text(ctx, t(used === DOCK.slots ? 'dock.full' : 'dock.almost'), VIEW.w / 2, DOCK.y + DOCK.h + 8, 11, '#d0453c');
   }
 }
 

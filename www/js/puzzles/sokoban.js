@@ -2,6 +2,7 @@
 import { pick, shuffle, splitTotal } from '../core/rng.js';
 import { inRect } from '../layout.js';
 import { rr, text, drawVacuum } from '../draw.js';
+import { t } from '../i18n.js';
 
 export const SK = Object.freeze({ size: 7, maxBoxes: 4 });
 const GATES = [[3, 0], [6, 3], [3, 6], [0, 3]];
@@ -119,7 +120,7 @@ function drawBoard(ctx, b, state) {
 export function createSokobanPuzzle({ counts, colors, rng }) {
   let state = createSokobanState(counts, colors, rng);
   return {
-    hint: () => 'Oynamak için robotun yanına dokun. Kutuları mor kapılara it.',
+    hint: () => t('soko.hint'),
     tap(x, y, r) {
       if (inRect(undoRect(r), x, y)) {
         state = undoSokoban(state);
@@ -139,14 +140,14 @@ export function createSokobanPuzzle({ counts, colors, rng }) {
     draw(ctx, r) {
       drawBoard(ctx, boardRect(r), state);
       const sx = r.x + r.w - 52;
-      text(ctx, 'Kalan', sx, r.y + 22, 12, '#55697a');
+      text(ctx, t('soko.left'), sx, r.y + 22, 12, '#55697a');
       text(ctx, String(state.boxes.length + state.queue.length), sx, r.y + 48, 28, '#2b3a4a', 'center', 800);
-      text(ctx, 'kutu', sx, r.y + 72, 12, '#55697a');
+      text(ctx, t('soko.boxes'), sx, r.y + 72, 12, '#55697a');
       const u = undoRect(r);
       ctx.fillStyle = state.history.length ? '#ffffff' : 'rgba(255,255,255,0.5)';
       rr(ctx, u.x, u.y, u.w, u.h, 12);
       ctx.fill();
-      text(ctx, '↶ Geri al', u.x + u.w / 2, u.y + u.h / 2, 14, '#2f62a8', 'center', 800);
+      text(ctx, t('soko.undo'), u.x + u.w / 2, u.y + u.h / 2, 14, '#2f62a8', 'center', 800);
     },
     isDone: () => sokobanDone(state),
     isStuck: () => sokobanStuck(state),

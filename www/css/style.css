@@ -113,3 +113,7 @@ button.link { background: none; border: none; color: var(--muted); margin-top: 1
 .level-info { display: flex; flex-direction: column; }
 .level-info strong { font-size: 14px; }
 .level-info span { font-size: 12px; color: var(--muted); }
+
+.lang-btn { font-size: 13px; font-weight: 800; letter-spacing: 0.5px; }
+.overlay { padding-top: 64px; }
+.topbar { position: relative; z-index: 20; }

@@ -1,4 +1,5 @@
-import { LEVELS } from './levels.js';
+import { LEVELS, levelName, puzzleName } from './levels.js';
+import { t, getLang, setLang, applyStatic } from './i18n.js';
 import { createGame, updateGame, addVacuums, tapDock } from './game.js';
 import { renderGame, drawThumb } from './render.js';
 import { VIEW, PUZ, DOCK, dockRect, inRect } from './layout.js';
@@ -64,9 +65,9 @@ function buildMenu() {
     const info = document.createElement('div');
     info.className = 'level-info';
     const title = document.createElement('strong');
-    title.textContent = `${i + 1}. ${lv.picture.name}`;
+    title.textContent = `${i + 1}. ${levelName(lv)}`;
     const sub = document.createElement('span');
-    sub.textContent = i >= unlocked ? '🔒 Kilitli' : lv.puzzle.name;
+    sub.textContent = i >= unlocked ? t('menu.locked') : puzzleName(lv);
     info.append(title, sub);
     card.append(thumb, info);
     card.addEventListener('click', () => startLevel(i));
@@ -76,6 +77,7 @@ function buildMenu() {
 
 function openMenu() {
   game = null;
+  refreshTitles();
   buildMenu();
   show('result', false);
   show('menu', true);
@@ -93,6 +95,20 @@ function buildGame(lv) {
   throw new Error('Bölüm oluşturulamadı');
 }
 
+function refreshTitles() {
+  const lv = game ? game.level : null;
+  $('title').textContent = lv ? `${levelIndex + 1}. ${levelName(lv)}` : 'Sand Vac';
+  $('subtitle').textContent = lv ? puzzleName(lv) : '';
+}
+
+function applyLanguage() {
+  applyStatic(document);
+  $('btnLang').textContent = getLang() === 'tr' ? 'EN' : 'TR';
+  refreshTitles();
+  if (!$('menu').classList.contains('hidden')) buildMenu();
+  if (game && game.status !== 'play' && !$('result').classList.contains('hidden')) showResultText();
+}
+
 function startLevel(i) {
   sfx.unlock();
   levelIndex = i;
@@ -100,25 +116,27 @@ function startLevel(i) {
   const lv = LEVELS[i];
   game = buildGame(lv);
   shownStatus = 'play';
-  $('title').textContent = `${i + 1}. ${lv.picture.name}`;
-  $('subtitle').textContent = lv.puzzle.name;
+  refreshTitles();
   show('menu', false);
   show('result', false);
 }
 
-function showResult() {
+function showResultText() {
   const won = game.status === 'won';
-  if (won) {
+  $('resultTitle').textContent = t(won ? 'result.won' : 'result.lost');
+  $('resultText').textContent = won ? t('result.album', { name: levelName(game.level) }) : t(game.reason);
+  $('btnNext').classList.toggle('hidden', !(won && levelIndex < LEVELS.length - 1));
+  $('btnRetry').textContent = t(won ? 'result.replay' : 'result.retry');
+}
+
+function showResult() {
+  if (game.status === 'won') {
     saveUnlocked(Math.max(loadUnlocked(), Math.min(LEVELS.length, levelIndex + 2)));
     sfx.win();
   } else {
     sfx.fail();
   }
-  $('resultTitle').textContent = won ? 'Tablo tertemiz! ✨' : 'Olmadı!';
-  $('resultText').textContent = won ? `${game.level.picture.name} albüme eklendi.` : game.reason;
-  const hasNext = won && levelIndex < LEVELS.length - 1;
-  $('btnNext').classList.toggle('hidden', !hasNext);
-  $('btnRetry').textContent = won ? 'Tekrar oyna' : 'Tekrar dene';
+  showResultText();
   show('result', true);
 }
 
@@ -163,6 +181,10 @@ function frame(now) {
 
 function wireButtons() {
   $('btnMenu').addEventListener('click', openMenu);
+  $('btnLang').addEventListener('click', () => {
+    setLang(getLang() === 'tr' ? 'en' : 'tr');
+    applyLanguage();
+  });
   $('btnRestart').addEventListener('click', () => game && startLevel(levelIndex));
   $('btnSound').addEventListener('click', () => {
     $('btnSound').textContent = sfx.toggle() ? '🔊' : '🔇';
@@ -178,4 +200,5 @@ window.addEventListener('resize', resize);
 wireButtons();
 resize();
 openMenu();
+applyLanguage();
 requestAnimationFrame(frame);

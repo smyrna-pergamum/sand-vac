@@ -81,7 +81,7 @@ function settleRail(g, events) {
       const slot = g.dock.indexOf(null);
       if (slot < 0) {
         g.status = 'lost';
-        g.reason = 'İskele doldu! Dönen süpürgeye yer kalmadı.';
+        g.reason = 'lose.dock';
         events.fail = true;
       } else {
         g.dock[slot] = { ...v };
@@ -120,7 +120,7 @@ export function updateGame(g, dt) {
     }
   } else if (g.puzzle.isStuck()) {
     g.status = 'lost';
-    g.reason = 'Bulmacada hamle kalmadı.';
+    g.reason = 'lose.stuck';
     events.fail = true;
   }
   return events;

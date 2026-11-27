@@ -3,6 +3,7 @@
 import { shuffle } from '../core/rng.js';
 import { gridHit } from '../layout.js';
 import { drawVacuum, text } from '../draw.js';
+import { t } from '../i18n.js';
 
 export const MERGE = Object.freeze({ cols: 4, rows: 4, slack: 2 });
 const TOP = 30;
@@ -73,8 +74,8 @@ export function createMergePuzzle({ counts, colors, rng }) {
   const area = (r) => ({ x: r.x, y: r.y + TOP, w: r.w, h: r.h - TOP });
   return {
     hint: () => (state.selected === null
-      ? 'Aynı renk + aynı sayıyı birleştir. Dokun, tekrar dokun = gönder.'
-      : 'Eşini seç (birleştir) ya da aynısına dokun (gönder).'),
+      ? t('merge.hint')
+      : t('merge.hintSelected')),
     tap(x, y, r) {
       const hit = gridHit(area(r), MERGE.cols, MERGE.rows, x, y);
       if (!hit) return { emitted: [], sound: null };
@@ -83,8 +84,8 @@ export function createMergePuzzle({ counts, colors, rng }) {
       return { emitted: res.emitted, sound: res.emitted.length ? 'launch' : res.ok ? 'tap' : 'bad' };
     },
     draw(ctx, r) {
-      text(ctx, `Gönderim hakkı: ${state.moves}`, r.x + 8, r.y + 12, 14, '#2b3a4a', 'left', 800);
-      text(ctx, `Sırada: ${state.queue.length}`, r.x + r.w - 8, r.y + 12, 13, '#55697a', 'right');
+      text(ctx, t('merge.moves', { n: state.moves }), r.x + 8, r.y + 12, 14, '#2b3a4a', 'left', 800);
+      text(ctx, t('merge.queue', { n: state.queue.length }), r.x + r.w - 8, r.y + 12, 13, '#55697a', 'right');
       const a = area(r);
       const cw = a.w / MERGE.cols;
       const ch = a.h / MERGE.rows;

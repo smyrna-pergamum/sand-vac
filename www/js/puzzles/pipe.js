@@ -4,6 +4,7 @@ import { randInt, shuffle, splitTotal } from '../core/rng.js';
 import { gridHit } from '../layout.js';
 import { rr, text, drawVacuum } from '../draw.js';
 import { colorOf } from '../core/palette.js';
+import { t } from '../i18n.js';
 
 export const PP = Object.freeze({ size: 5 });
 export const N_ = 1;
@@ -148,7 +149,7 @@ export function createPipePuzzle({ counts, colors, rng }) {
   let state = createPipeState(counts, colors, rng);
   const board = (r) => ({ x: r.x + (r.w - 240) / 2, y: r.y + 26, w: 240, h: 240 });
   return {
-    hint: () => 'Borulara dokunup döndür. Kumu süpürgeye ulaştır.',
+    hint: () => t('pipe.hint'),
     tap(x, y, r) {
       const hit = gridHit(board(r), PP.size, PP.size, x, y);
       if (!hit) return { emitted: [], sound: null };
@@ -159,14 +160,14 @@ export function createPipePuzzle({ counts, colors, rng }) {
     draw(ctx, r) {
       const b = board(r);
       const cs = b.w / PP.size;
-      text(ctx, `Pano ${Math.min(state.solved + 1, state.total)} / ${state.total}`, r.x + r.w / 2, r.y + 10, 13, '#55697a');
+      text(ctx, t('pipe.board', { a: Math.min(state.solved + 1, state.total), b: state.total }), r.x + r.w / 2, r.y + 10, 13, '#55697a');
       const key = state.current ? state.current.color : 'grey';
       drawPipes(ctx, b, state.board, colorOf(key));
       const sy = b.y + (state.board.rs + 0.5) * cs;
       ctx.fillStyle = colorOf(key);
       rr(ctx, b.x - 44, sy - 22, 38, 44, 8);
       ctx.fill();
-      text(ctx, 'KUM', b.x - 25, sy, 10, '#ffffff', 'center', 800);
+      text(ctx, t('pipe.sand'), b.x - 25, sy, 10, '#ffffff', 'center', 800);
       const ty = b.y + (state.board.rt + 0.5) * cs;
       if (state.current) {
         drawVacuum(ctx, b.x + b.w + 26, ty, 40, 30, key, state.current.cap, { angle: Math.PI / 2, dim: true });

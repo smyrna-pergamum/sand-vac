@@ -9,13 +9,14 @@
 </head>
 <body>
   <header class="topbar">
-    <button id="btnMenu" class="icon-btn" aria-label="Menü">☰</button>
+    <button id="btnMenu" class="icon-btn" data-i18n-label="ui.menu" aria-label="Menü">☰</button>
     <div class="titles">
       <strong id="title">Sand Vac</strong>
       <span id="subtitle"></span>
     </div>
-    <button id="btnSound" class="icon-btn" aria-label="Ses">🔊</button>
-    <button id="btnRestart" class="icon-btn" aria-label="Yeniden başlat">↻</button>
+    <button id="btnLang" class="icon-btn lang-btn" data-i18n-label="ui.language" aria-label="Dil">EN</button>
+    <button id="btnSound" class="icon-btn" data-i18n-label="ui.sound" aria-label="Ses">🔊</button>
+    <button id="btnRestart" class="icon-btn" data-i18n-label="ui.restart" aria-label="Yeniden başlat">↻</button>
   </header>
 
   <main id="stage">
@@ -25,8 +26,8 @@
   <section id="menu" class="overlay">
     <div class="panel menu-panel">
       <h1>Sand Vac</h1>
-      <p class="tagline">Altta bulmacayı çöz, süpürgeleri kazan, üstteki kumdan tabloyu tertemiz yap.</p>
-      <button id="btnPlay" class="primary">Oyna</button>
+      <p class="tagline" data-i18n="menu.tagline">Altta bulmacayı çöz, süpürgeleri kazan, üstteki kumdan tabloyu tertemiz yap.</p>
+      <button id="btnPlay" class="primary" data-i18n="menu.play">Oyna</button>
       <div id="levels" class="levels"></div>
     </div>
   </section>
@@ -35,9 +36,9 @@
     <div class="panel">
       <h2 id="resultTitle"></h2>
       <p id="resultText"></p>
-      <button id="btnNext" class="primary">Sonraki bölüm</button>
-      <button id="btnRetry" class="secondary">Tekrar dene</button>
-      <button id="btnResMenu" class="link">Bölümler</button>
+      <button id="btnNext" class="primary" data-i18n="result.next">Sonraki bölüm</button>
+      <button id="btnRetry" class="secondary" data-i18n="result.retry">Tekrar dene</button>
+      <button id="btnResMenu" class="link" data-i18n="result.levels">Bölümler</button>
     </div>
   </section>
 

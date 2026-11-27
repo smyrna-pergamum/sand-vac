@@ -3,6 +3,7 @@
 import { pick, randInt, shuffle, splitTotal } from '../core/rng.js';
 import { gridHit } from '../layout.js';
 import { drawVacuum, onVacuumLabel, rr } from '../draw.js';
+import { t } from '../i18n.js';
 
 export const AR = Object.freeze({ cols: 6, rows: 5 });
 export const DIRS = Object.freeze({ up: [0, -1], right: [1, 0], down: [0, 1], left: [-1, 0] });
@@ -75,7 +76,7 @@ export function createArrowPuzzle({ counts, colors, rng }) {
   let flying = [];
   const board = (r) => ({ x: r.x + 4, y: r.y + 8, w: r.w - 8, h: r.h - 12 });
   return {
-    hint: () => 'Okun yönü boşsa süpürge kayıp çıkar. Doğru sırayı bul!',
+    hint: () => t('arrow.hint'),
     tap(x, y, r) {
       const hit = gridHit(board(r), AR.cols, AR.rows, x, y);
       if (!hit) return { emitted: [], sound: null };
